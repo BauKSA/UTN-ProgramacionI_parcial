@@ -21,26 +21,21 @@ public class PlayerEnemyBulletCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("EnemyBullet"))
+        if (!collision.CompareTag("EnemyBullet") && !collision.CompareTag("Wall") && !collision.CompareTag("EnemyShip"))
             return;
 
-        Destroy(collision.gameObject);
+        if (collision.CompareTag("EnemyBullet")) Destroy(collision.gameObject);
 
         if (_healthController.Invincibility)
             return;
 
         _positionController.Stop();
+        _positionController.ClearConstantForwardMovement();
         _movementStateController.CanMove = false;
         _movementStateController.Reset();
 
         _healthController.SetInvincibility(true);
         _healthController.SetAlive(false);
-        _animationController.StartAnimation("PlayerShip_Damaged", true, () =>
-        {
-            _healthController.AddLives(-1);
-            _healthController.SetInvincibility(false);
-            _healthController.SetAlive(true);
-            _movementStateController.CanMove = true;
-        });
+        _animationController.StartAnimation("PlayerShip_Damaged", true, _healthController.CheckState);
     }
 }

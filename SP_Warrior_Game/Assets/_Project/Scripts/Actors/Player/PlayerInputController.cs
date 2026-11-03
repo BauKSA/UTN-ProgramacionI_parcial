@@ -22,9 +22,9 @@ public class PlayerInputController : MonoBehaviour
     private AnimationController _animationController;
     private PlayerHealthStateController _healthController;
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        GlobalInputController.Instance.OnPlayerMovementChanged += SyncBindings;
+        GlobalInputController.Instance.OnPlayerMovementChanged -= SyncBindings;
     }
 
     private void Awake()
@@ -37,6 +37,9 @@ public class PlayerInputController : MonoBehaviour
 
     private void Start()
     {
+        GlobalInputController.Instance.SetContext(GlobalInputController.InputContext.GAMEPLAY);
+        GlobalInputController.Instance.OnPlayerMovementChanged += SyncBindings;
+
         _actions = GlobalInputController.Instance.PlayerActions;
 
         ShootEvent shootEvent = new(_bulletPrefab, gameObject);

@@ -17,4 +17,9 @@ public class PlayerBulletTick : MonoBehaviour
     {
         _positionController.MoveForward(_movementSettings.Speed.x, _movementSettings.Acceleration);
     }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

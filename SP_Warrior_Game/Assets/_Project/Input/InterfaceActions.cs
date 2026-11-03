@@ -12,3 +12,10 @@ public interface IPlayerActions
     InputAction MoveLeft { get; }
     InputAction Shoot { get; }
 }
+
+public interface IMenuActions
+{
+    InputAction Start { get; }
+    InputAction Exit { get; }
+    InputAction Controls { get; }
+}

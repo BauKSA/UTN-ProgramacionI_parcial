@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18d3ee04bcb86a41a930f2105b88044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementSettings
-  speed: {x: 95, y: 75}
+  speed: {x: 105, y: 75}
   acceleration: 45
   deceleration: 25
   instantAcceleration: 1

@@ -15,9 +15,11 @@ public class EnemyShipTick : MonoBehaviour
     private GameObject _bulletPrefab;
 
     [SerializeField]
-    private float _shootInterval = 2f;
+    private float _shootInterval = 0.5f;
     [SerializeField]
     private char _shipType = 'A';
+
+    private bool _shipBTargetingPlayer = false;
 
     void Awake()
     {
@@ -27,20 +29,27 @@ public class EnemyShipTick : MonoBehaviour
 
     void Start()
     {
-        _shootPattern = new(_shootInterval, _bulletPrefab, transform);
+        if (_shipType == 'A') _shootPattern = new(_shootInterval, _bulletPrefab, transform);
     }
 
     private void Update()
     {
-        _shootPattern.Tick();
+        if (_shipType == 'A') _shootPattern.Tick();
+
+        if (_shipType == 'B')
+        {
+            if (_shipBTargetingPlayer)
+            {
+                Vector2 direction = _player.transform.position - transform.position;
+                transform.right = direction;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("PlayerViewRange"))
             return;
-
-        _shootPattern.Activate();
 
         _positionController.SetConstantForwardMovement(_movementSettings.Speed.x);
 
@@ -51,6 +60,15 @@ public class EnemyShipTick : MonoBehaviour
 
             Vector2 direction = _player.transform.position - transform.position;
             transform.right = direction;
+
+            _shootPattern.Activate();
+        }
+        if (_shipType == 'B')
+        {
+            Vector2 direction = _player.transform.position - transform.position;
+            transform.right = direction;
+
+            _shipBTargetingPlayer = true;
         }
     }
 }

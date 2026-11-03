@@ -8,6 +8,7 @@ public class GlobalInputController : MonoBehaviour
 
     // Controllers
     public GlobalInput.PlayerInputActions PlayerInputActions => _controller.PlayerInput;
+    public GlobalInput.MenuInputActions MenuInputActions => _controller.MenuInput;
 
     public enum InputContext
     {
@@ -23,6 +24,7 @@ public class GlobalInputController : MonoBehaviour
 
     private InputContext _context;
     public IPlayerActions PlayerActions { get; private set; }
+    public IMenuActions MenuActions { get; private set; }
     public event System.Action OnPlayerMovementChanged;
 
     public PlayerMovementType PlayerMovement { get; private set; }
@@ -49,6 +51,15 @@ public class GlobalInputController : MonoBehaviour
         public InputAction Shoot => _map.Shoot;
     }
 
+    private class MenuActionsWrapper : IMenuActions
+    {
+        private readonly GlobalInput.MenuInputActions _map;
+        public MenuActionsWrapper(GlobalInput.MenuInputActions map) => _map = map;
+        public InputAction Start => _map.Start;
+        public InputAction Exit => _map.Exit;
+        public InputAction Controls => _map.Controls;
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -62,9 +73,10 @@ public class GlobalInputController : MonoBehaviour
 
         _controller = new GlobalInput();
         PlayerActions = new PlayerActionsWrapper(_controller.PlayerInput);
+        MenuActions = new MenuActionsWrapper(_controller.MenuInput);
         PlayerMovement = PlayerMovementType.LIMITED;
 
-        SetContext(InputContext.GAMEPLAY);
+        SetContext(InputContext.MENU);
     }
 
     private void OnDestroy()
@@ -87,6 +99,9 @@ public class GlobalInputController : MonoBehaviour
         {
             case InputContext.GAMEPLAY:
                 _controller.PlayerInput.Enable();
+                break;
+            case InputContext.MENU:
+                _controller.MenuInput.Enable();
                 break;
             default:
                 break;

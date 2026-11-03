@@ -17,4 +17,9 @@ public class EnemyBulletTick : MonoBehaviour
     {
         _positionController.SetConstantForwardMovement(_movementSettings.Speed.x);
     }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

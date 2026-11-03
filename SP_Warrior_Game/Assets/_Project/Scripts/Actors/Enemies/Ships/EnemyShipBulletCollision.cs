@@ -18,15 +18,15 @@ public class EnemyShipBulletCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("PlayerBullet"))
+        if (!collision.CompareTag("PlayerBullet") && !collision.CompareTag("Wall") && !collision.CompareTag("Player"))
             return;
 
-        Destroy(collision.gameObject);
+        if (collision.CompareTag("PlayerBullet")) Destroy(collision.gameObject);
 
         _positionController.ClearConstantForwardMovement();
         _positionController.Stop();
         
-        _animationController.StartAnimation($"EnemyShipA_Damaged", true, () => Destroy(gameObject));
+        _animationController.StartAnimation($"EnemyShip{_shipType}_Damaged", true, () => Destroy(gameObject));
 
     }
 }
