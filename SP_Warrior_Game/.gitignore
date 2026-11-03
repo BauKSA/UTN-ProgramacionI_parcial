@@ -1,0 +1,96 @@
+# ============================
+# Unity (2D) - .gitignore
+# ============================
+
+# Carpetas generadas por Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Memory Profiler
+/[Mm]emoryCaptures/
+
+# Recordings (Unity Recorder)
+/[Rr]ecordings/
+
+# Assets generados automáticamente
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# Addressables / Asset Bundles (descomentar si no querés versionarlos)
+# /[Aa]ssets/AddressableAssetsData/*/*.bin*
+# /[Aa]ssets/StreamingAssets/aa*
+
+# Carpetas de IDEs
+/.vs/
+/.vscode/
+/.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Archivos de proyecto autogenerados por Unity
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Archivos de debug / profiling
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Crash logs
+sysinfo.txt
+crashlytics-build.properties
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
+*.unitypackage.meta
+*.app
+*.exe
+
+# Gradle / Android
+/[Aa]ssets/Plugins/Android/*.androidlib/build/
+*.keystore
+*.jks
+
+# Xcode / iOS
+/[Ii]os[Bb]uild/
+*.xcodeproj/xcuserdata/
+
+# Visual Studio cache
+.vs/
+ExportedObj/
+.consulo/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Archivos de Rider / Resharper
+*.DotSettings.user
+.idea_modules/
+
+# Cache de Packages (Package Manager lo regenera desde manifest.json)
+/[Pp]ackages/packages-lock.json.bak
